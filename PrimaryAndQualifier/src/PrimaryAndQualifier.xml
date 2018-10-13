@@ -13,12 +13,18 @@
     <bean id="song1"
           class="beans.Song"
           p:context="shihaofengqiu"
-          primary="false"/>
+          primary="false">
+        <qualifier value="main"/>
+    </bean>
+
+
 
     <bean id="song2"
           class="beans.Song"
           p:context="bolizhiqing"
-          primary="true"/>
+          primary="true">
+        <qualifier value="main"/>
+    </bean>
 
     <bean id="song3"
           class="beans.Song"

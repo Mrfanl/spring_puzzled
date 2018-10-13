@@ -10,5 +10,10 @@ public class Test {
         ApplicationContext ctx = new ClassPathXmlApplicationContext("PrimaryAndQualifier.xml");
         Singer xiaoming = ctx.getBean("xiaoming",Singer.class);
         xiaoming.play();
+        ((ClassPathXmlApplicationContext)ctx).close();
+
+
+
+
     }
 }

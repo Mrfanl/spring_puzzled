@@ -3,12 +3,20 @@ package beans;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
+import javax.annotation.Resource;
+import java.util.Iterator;
+import java.util.Set;
+
 public class Singer {
 
     private String name;
-    @Autowired
+
+//    @Autowired
+    @Resource
     @Qualifier("main")
-    private Song song;
+    private Set<Song> songs;
 
     public Singer(){}
 
@@ -16,14 +24,28 @@ public class Singer {
         this.name = name;
     }
 
+    @PostConstruct
+    public void populateMovieCache() {
+        System.out.println("populates the movie cache upon initialization...");
+    }
 
-   public void setSong(Song song) {
-        this.song = song;
+    @PreDestroy
+    public void clearMovieCache() {
+        // clears the movie cache upon destruction...
+        System.out.println("clears the movie cache upon destruction...");
+
     }
 
 
+    public void setSongs(Set<Song> songs) {
+        this.songs = songs;
+    }
+
     public void play(){
         System.out.println("myName is :"+this.name);
-        System.out.println("mySong is :"+this.song.getContext());
+        Iterator<Song> iter = this.songs.iterator();
+        while(iter.hasNext()){
+            System.out.println("one of my Song is:"+iter.next().getContext());
+        }
     }
 }
